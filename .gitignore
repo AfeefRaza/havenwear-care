@@ -1,0 +1,26 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+node_modules
+dist
+dist-ssr
+dev-dist
+coverage
+*.local
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.sw?
+
+# Secrets — never commit env files (only .env.example)
+.env
+.env.*
+!.env.example
+supabase/.temp
+supabase/.branches
+supabase/functions/.env

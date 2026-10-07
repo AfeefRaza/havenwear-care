@@ -1,0 +1,157 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* Design tokens — warm neutral, charcoal ink, copper accent. Light by default; dark via
+   [data-theme=dark] (follows the system unless the user picks one in Account). */
+:root {
+  --c-bg: #f6f6f4;
+  --c-surface: #ffffff;
+  --c-surface-2: #f1f1ee;
+  --c-hover: #ebebe7;
+  --c-border: #e3e3de;
+  --c-border-strong: #cfcfc8;
+  --c-text: #17181c;
+  --c-muted: #6b6d74;
+  --c-faint: #9a9ca3;
+  --c-primary: #17181c;
+  --c-primary-fg: #ffffff;
+  --c-accent: #b86a2c;
+  --c-accent-bg: #f8ece1;
+  --c-ok: #1d7a46;
+  --c-ok-bg: #e5f4ea;
+  --c-warn: #9a5b06;
+  --c-warn-bg: #fdf2dc;
+  --c-bad: #b3261e;
+  --c-bad-bg: #fdeceb;
+  --c-info: #2456c7;
+  --c-info-bg: #e8effd;
+  --c-violet: #6b46c1;
+  --c-violet-bg: #f0ebfb;
+  --c-ring: #b86a2c55;
+  --c-series-1: #2a78d6;
+  --c-series-2: #eb6834;
+  --shadow-pop: 0 10px 30px -10px rgb(20 20 30 / 0.25), 0 1px 3px rgb(20 20 30 / 0.08);
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --c-bg: #0f1013;
+  --c-surface: #17181c;
+  --c-surface-2: #1d1f24;
+  --c-hover: #24262c;
+  --c-border: #2a2c33;
+  --c-border-strong: #3a3d45;
+  --c-text: #ececee;
+  --c-muted: #a0a2aa;
+  --c-faint: #6f727a;
+  --c-primary: #ececee;
+  --c-primary-fg: #121316;
+  --c-accent: #e09a5b;
+  --c-accent-bg: #3a2717;
+  --c-ok: #5fd08f;
+  --c-ok-bg: #12291c;
+  --c-warn: #f2b84b;
+  --c-warn-bg: #33270d;
+  --c-bad: #f2867f;
+  --c-bad-bg: #3a1716;
+  --c-info: #8fb1ff;
+  --c-info-bg: #16213b;
+  --c-violet: #b9a0f5;
+  --c-violet-bg: #251c3d;
+  --c-ring: #e09a5b66;
+  --c-series-1: #3987e5;
+  --c-series-2: #d95926;
+  --shadow-pop: 0 12px 34px -10px rgb(0 0 0 / 0.6), 0 1px 3px rgb(0 0 0 / 0.4);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --color-bg: var(--c-bg);
+  --color-surface: var(--c-surface);
+  --color-surface-2: var(--c-surface-2);
+  --color-hover: var(--c-hover);
+  --color-border: var(--c-border);
+  --color-border-strong: var(--c-border-strong);
+  --color-text: var(--c-text);
+  --color-muted: var(--c-muted);
+  --color-faint: var(--c-faint);
+  --color-primary: var(--c-primary);
+  --color-primary-fg: var(--c-primary-fg);
+  --color-accent: var(--c-accent);
+  --color-accent-bg: var(--c-accent-bg);
+  --color-ok: var(--c-ok);
+  --color-ok-bg: var(--c-ok-bg);
+  --color-warn: var(--c-warn);
+  --color-warn-bg: var(--c-warn-bg);
+  --color-bad: var(--c-bad);
+  --color-bad-bg: var(--c-bad-bg);
+  --color-info: var(--c-info);
+  --color-info-bg: var(--c-info-bg);
+  --color-violet: var(--c-violet);
+  --color-violet-bg: var(--c-violet-bg);
+  --shadow-pop: var(--shadow-pop);
+  --color-series-1: var(--c-series-1);
+  --color-series-2: var(--c-series-2);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: 'cv11', 'ss01';
+}
+
+*:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 1px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--c-accent-bg);
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Thin, unobtrusive scrollbars for the dense panes */
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--c-border-strong) transparent;
+}
+
+[cmdk-item][data-selected='true'] {
+  background: var(--c-hover);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-in {
+  animation: fade-in 140ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-in {
+    animation: none;
+  }
+}

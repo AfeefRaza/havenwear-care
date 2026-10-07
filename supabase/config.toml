@@ -1,0 +1,12 @@
+# Supabase CLI settings for this app's Edge Functions.
+# The database is the shared Hisab Kitab project (link it with
+# `supabase link --project-ref <ref>`); the ref is not a secret but stays out of code.
+project_id = "havenwear-care"
+
+# Both functions require a signed-in user's JWT at the gateway AND check
+# Havenwear Care membership/role themselves.
+[functions.crm-live]
+verify_jwt = true
+
+[functions.crm-admin]
+verify_jwt = true

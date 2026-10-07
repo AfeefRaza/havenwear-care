@@ -1,0 +1,36 @@
+import js from '@eslint/js'
+import globals from 'globals'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import jsxA11y from 'eslint-plugin-jsx-a11y'
+import tseslint from 'typescript-eslint'
+
+export default tseslint.config(
+  { ignores: ['dist', 'dev-dist', 'coverage', 'node_modules', 'supabase'] },
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [js.configs.recommended, ...tseslint.configs.recommended, jsxA11y.flatConfigs.recommended],
+    languageOptions: { ecmaVersion: 2023, globals: globals.browser },
+    plugins: { 'react-hooks': reactHooks, 'react-refresh': reactRefresh },
+    rules: {
+      ...reactHooks.configs.recommended.rules,
+      // Dev-only HMR hint; provider+hook files intentionally export both.
+      'react-refresh/only-export-components': 'off',
+      'no-restricted-syntax': [
+        'error',
+        {
+          selector: "JSXAttribute[name.name='dangerouslySetInnerHTML']",
+          message: 'dangerouslySetInnerHTML is banned in this project.',
+        },
+      ],
+      // Internal tool: focusing the search / lookup box on open is the expected workflow.
+      'jsx-a11y/no-autofocus': 'off',
+      'jsx-a11y/label-has-associated-control': ['error', { controlComponents: ['Input', 'Select', 'Textarea', 'Switch', 'Segmented'], depth: 4 }],
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+    },
+  },
+  {
+    files: ['scripts/**/*.{js,mjs}', '*.config.{js,ts}'],
+    languageOptions: { globals: globals.node },
+  },
+)
